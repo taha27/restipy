@@ -2,7 +2,7 @@ from api import app
 from api import database
 from flask import jsonify
 
-# Decorator for the view function to return a list of all companies
+# Decorator for the view function to return information for all companies
 @app.route('/companies', methods=['GET'])
 def read_companies():
     """
