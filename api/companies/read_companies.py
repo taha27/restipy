@@ -8,7 +8,6 @@ def read_companies():
     """
     Read all companies' details
     """
-
     # Build a dictionary with all company specific kv pairs
     db = database()
     companies_dict = {key: value for key, value in db.items()}
