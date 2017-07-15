@@ -9,13 +9,15 @@ def read_company(company_id):
     """
     Read one company's details
     """
-    # Load info from database
-    db = database()
-    # Check if the company id specified is valid
-    if company_id not in db:
+    # Get the companies collection from the database
+    company_collection = database()
+
+    # Get the document for the company with the specified id
+    company = company_collection.find_one({'id': company_id}, {'_id': 0})
+
+    # Throw the appropriate error if the company id was not found
+    if not company:
         abort(HTTPStatus.NOT_FOUND)
-    # Get the company specific information from the database
-    company = db[company_id]
 
     # Return company as JSON
     return jsonify(company)
