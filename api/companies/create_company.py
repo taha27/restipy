@@ -36,4 +36,4 @@ def create_company():
             check_and_insert(company)
 
     # Return the created company as JSON
-    return jsonify(companies), 201
+    return jsonify(companies_json), 201

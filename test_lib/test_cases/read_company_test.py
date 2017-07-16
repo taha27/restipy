@@ -12,7 +12,7 @@ class TestReadCompany(BaseTestCase):
         Tests if a company is in the database
         """
         resp = self.app.get('/companies/ibm')
-        assert b'New York' in resp.data
+        self.assertTrue(b'International Business Machines' in resp.data)
 
         # response_dict = json.loads(resp.data.decode('utf-8'))
         # assert 'Palo Alto' == response_dict['city']
@@ -21,7 +21,7 @@ class TestReadCompany(BaseTestCase):
         """
         Tests if a company is not in the database
         """
-        resp = self.app.get('/companies/google')
+        resp = self.app.get('/companies/hooli')
         self.assertEqual(resp.status_code, HTTPStatus.NOT_FOUND)
 
 if __name__ == '__main__':
