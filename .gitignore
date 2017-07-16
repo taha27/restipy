@@ -109,3 +109,6 @@ ENV/
 
 # mongodb instance
 data/*
+
+# sample curl test commands
+curl_samples.txt
