@@ -13,7 +13,8 @@ def read_companies():
     company_collection = database()
 
     # Get all companies' documents and assemble a list of company dictionaries
-    companies_cursor = company_collection.find({}, {'_id': 0})
+    companies_cursor = company_collection.find({})
+
     companies_list = [
         {
             key: value for key, value in company.items()

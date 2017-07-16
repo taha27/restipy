@@ -17,7 +17,7 @@ class TestReadCompanies(BaseTestCase):
         Tests if a company id is not in the response
         """
         resp = self.app.get('/companies')
-        self.assertFalse(b'google' in resp.data)
+        self.assertFalse(b'hooli' in resp.data)
 
 if __name__ == '__main__':
     unittest.main()
