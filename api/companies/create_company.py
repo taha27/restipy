@@ -1,4 +1,3 @@
-import sys
 from http import HTTPStatus
 from api import app, database
 from flask import jsonify, request, abort
