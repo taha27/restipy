@@ -1,6 +1,6 @@
 from http import HTTPStatus
 from api import app, database
-from flask import jsonify, request, abort
+from flask import jsonify, request, abort, make_response
 
 def check_and_insert(company):
     """
@@ -12,8 +12,8 @@ def check_and_insert(company):
     # Check if a company document already exists with the id provided and throw HTTP error if so
     company_in_db = company_collection.find_one({'_id': company['_id']}, {'_id': 0})
     if company_in_db:
-        print(f"Company with id '{company['_id']}' already exists in the database.")
-        abort(HTTPStatus.CONFLICT)
+        conflict_msg = f"Company with id '{company['_id']}' already exists in the database."
+        abort(make_response(jsonify(message=conflict_msg), HTTPStatus.CONFLICT))
 
     # Insert the posted company json body as a document in the database
     company_collection.insert_one(company)
@@ -35,4 +35,4 @@ def create_company():
             check_and_insert(company)
 
     # Return the created company as JSON
-    return jsonify(companies_json), 201
+    return jsonify(companies_json), HTTPStatus.CREATED

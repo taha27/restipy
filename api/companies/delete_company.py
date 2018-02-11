@@ -1,6 +1,6 @@
 from http import HTTPStatus
 from api import app, database
-from flask import abort, jsonify
+from flask import abort, jsonify, make_response
 
 @app.route('/companies/<string:company_id>', methods=['DELETE'])
 def delete_company(company_id):
@@ -15,7 +15,8 @@ def delete_company(company_id):
 
     # Throw the appropriate error if the company id isn't found
     if not deleted_company_document:
-        abort(HTTPStatus.NOT_FOUND)
+        not_found_msg = f"Company with id '{company_id}' does not exist in the database."
+        abort(make_response(jsonify(message=not_found_msg), HTTPStatus.NOT_FOUND))
 
     # Return the deleted company document as JSON
-    return jsonify(deleted_company_document), 200
+    return jsonify(deleted_company_document), HTTPStatus.OK
