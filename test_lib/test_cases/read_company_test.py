@@ -12,7 +12,7 @@ class TestReadCompany(BaseTestCase):
         Tests if a company is in the database
         """
         resp = self.app.get('/companies/ibm')
-        self.assertTrue(b'International Business Machines' in resp.data)
+        self.assertIn(b'International Business Machines', resp.data)
 
         # response_dict = json.loads(resp.data.decode('utf-8'))
         # assert 'Palo Alto' == response_dict['city']
