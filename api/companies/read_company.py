@@ -1,6 +1,6 @@
 from http import HTTPStatus
 from api import app, database
-from flask import jsonify, abort
+from flask import jsonify, abort, make_response
 
 # Decorator for the view function to return a information for a specific company
 @app.route('/companies/<string:company_id>', methods=['GET'])
@@ -16,7 +16,8 @@ def read_company(company_id):
 
     # Throw the appropriate error if the company id was not found
     if not company:
-        abort(HTTPStatus.NOT_FOUND)
+        not_found_msg = f"Company with id '{company_id}' does not exist in the database."
+        abort(make_response(jsonify(message=not_found_msg), HTTPStatus.NOT_FOUND))
 
     # Return company as JSON
     return jsonify(company)
